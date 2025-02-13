@@ -1,0 +1,140 @@
+
+-Goal-
+Given a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: One of the following types: [film, television, person, organization, documentary, actor, director, producer, screenwriter, musical composition, album, play, song, franchise]
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+- relationship_strength: an integer score between 1 to 10, indicating strength of the relationship between the source entity and target entity
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
+3. Return output in The primary language of the provided text is "English." as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+
+4. If you have to translate into The primary language of the provided text is "English.", just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
+-Examples-
+######################
+
+Example 1:
+
+entity_types: [film, television, person, organization, documentary, actor, director, producer, screenwriter, musical composition, album, play, song, franchise]
+text:
+, new governmental employees were tested on the book at job interviews and
+Juliana was born in Stolberg as the daughter of Bodo VIII, Count of Stolberg-Wernigerode and Anna of Eppstein-Königstein.
+Starting his career as a commercial artist, Ray was drawn into independent filmmaking after meeting French filmmaker Jean Renoir and viewing Vittorio De Sica's Italian neorealist film" Bicycle Thieves"( 1948) during a visit to London.
+A playboy astrologer has to prove an alibi to police for a robbery five years before.
+From 1714 until her death, she was a Lady of the Bedchamber to Caroline of Ansbach, Princess of Wales.
+He led the traditional feuds of the House of Jülich and lost Kaiserswerth and Zülpich, among others.
+Born in Mount Olive, Butler County, Alabama, Williams relocated to Georgiana with his family, where he
+------------------------
+output:
+("entity"{tuple_delimiter}BODO VIII{tuple_delimiter}PERSON{tuple_delimiter}Bodo VIII was Count of Stolberg-Wernigerode and the father of Juliana.)
+{record_delimiter}
+("entity"{tuple_delimiter}ANNA OF EPPSTEIN-KÖNIGSTEIN{tuple_delimiter}PERSON{tuple_delimiter}Anna of Eppstein-Königstein was the mother of Juliana.)
+{record_delimiter}
+("entity"{tuple_delimiter}JULIANA{tuple_delimiter}PERSON{tuple_delimiter}Juliana is the daughter of Bodo VIII and Anna of Eppstein-Königstein.)
+{record_delimiter}
+("entity"{tuple_delimiter}RAY{tuple_delimiter}PERSON{tuple_delimiter}Ray is a commercial artist who transitioned into independent filmmaking after being influenced by Jean Renoir and Vittorio De Sica.)
+{record_delimiter}
+("entity"{tuple_delimiter}JEAN RENOIR{tuple_delimiter}PERSON{tuple_delimiter}Jean Renoir was a French filmmaker who influenced Ray's career in independent filmmaking.)
+{record_delimiter}
+("entity"{tuple_delimiter}VITTORIO DE SICA{tuple_delimiter}PERSON{tuple_delimiter}Vittorio De Sica was an Italian neorealist filmmaker known for his film "Bicycle Thieves" (1948).)
+{record_delimiter}
+("entity"{tuple_delimiter}BICYCLE THIEVES{tuple_delimiter}FILM{tuple_delimiter}"Bicycle Thieves" is a 1948 Italian neorealist film directed by Vittorio De Sica that influenced Ray's filmmaking career.)
+{record_delimiter}
+("entity"{tuple_delimiter}CAROLINE OF ANSBACH{tuple_delimiter}PERSON{tuple_delimiter}Caroline of Ansbach was the Princess of Wales and served as a patron to the Lady of the Bedchamber.)
+{record_delimiter}
+("entity"{tuple_delimiter}LADY OF THE BEDCHAMBER{tuple_delimiter}ORGANIZATION{tuple_delimiter}The Lady of the Bedchamber is a position held by women in royal households, including Juliana's service to Caroline of Ansbach.)
+{record_delimiter}
+("relationship"{tuple_delimiter}BODO VIII{tuple_delimiter}JULIANA{tuple_delimiter}Bodo VIII is the father of Juliana.{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}ANNA OF EPPSTEIN-KÖNIGSTEIN{tuple_delimiter}JULIANA{tuple_delimiter}Anna of Eppstein-Königstein is the mother of Juliana.{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}RAY{tuple_delimiter}JEAN RENOIR{tuple_delimiter}Ray was influenced by Jean Renoir's work in his transition to independent filmmaking.{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}RAY{tuple_delimiter}VITTORIO DE SICA{tuple_delimiter}Ray was influenced by Vittorio De Sica's film "Bicycle Thieves" in his filmmaking career.{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}VITTORIO DE SICA{tuple_delimiter}BICYCLE THIEVES{tuple_delimiter}Vittorio De Sica directed the film "Bicycle Thieves" (1948).{tuple_delimiter}10)
+{record_delimiter}
+("relationship"{tuple_delimiter}JULIANA{tuple_delimiter}LADY OF THE BEDCHAMBER{tuple_delimiter}Juliana served as a Lady of the Bedchamber to Caroline of Ansbach.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}CAROLINE OF ANSBACH{tuple_delimiter}LADY OF THE BEDCHAMBER{tuple_delimiter}The Lady of the Bedchamber served Caroline of Ansbach, Princess of Wales.{tuple_delimiter}8)
+{completion_delimiter}
+#############################
+
+
+Example 2:
+
+entity_types: [film, television, person, organization, documentary, actor, director, producer, screenwriter, musical composition, album, play, song, franchise]
+text:
+ had a recurring role on" Street Legal" in the 1989- 90 season as Jennifer Winston, a college student who was dating Chuck Tchobanian, and appeared in the film" The Myth of the Male Orgasm" and on stage in Canadian productions of" Les Misérables" and" Aspects of Love".
+Holter died in December 1997, following long-term illness.
+The film was released in the United Kingdom as The Secret Four.
+Valerian became Emperor on 22 October 253 and had the Roman senate elevate Gallienus to the ranks of Caesar and Augustus.
+The Girl from Manhattan is a 1948 American film starring Dorothy Lamour and George Montgomery.
+The song is from the artist's" Let Them Fall in Love" album.
+He was a member of the House of Lords from 1972 until 1999, losing his seat by the House of Lords Act.
+BioMed Central( BMC) is a United Kingdom- based,
+------------------------
+output:
+("entity"{tuple_delimiter}STREET LEGAL{tuple_delimiter}TELEVISION{tuple_delimiter}Street Legal is a television series that aired during the 1989-90 season featuring characters in a legal setting.)
+{record_delimiter}
+("entity"{tuple_delimiter}JENNIFER WINSTON{tuple_delimiter}PERSON{tuple_delimiter}Jennifer Winston is a character in Street Legal, portrayed as a college student dating Chuck Tchobanian.)
+{record_delimiter}
+("entity"{tuple_delimiter}CHUCK TCHOBANIAN{tuple_delimiter}PERSON{tuple_delimiter}Chuck Tchobanian is a character in Street Legal, who is in a relationship with Jennifer Winston.)
+{record_delimiter}
+("entity"{tuple_delimiter}THE MYTH OF THE MALE ORGASM{tuple_delimiter}FILM{tuple_delimiter}The Myth of the Male Orgasm is a film in which Holter appeared.)
+{record_delimiter}
+("entity"{tuple_delimiter}LES MISÉRABLES{tuple_delimiter}PLAY{tuple_delimiter}Les Misérables is a musical play in which Holter performed in Canadian productions.)
+{record_delimiter}
+("entity"{tuple_delimiter}ASPECTS OF LOVE{tuple_delimiter}PLAY{tuple_delimiter}Aspects of Love is a musical play in which Holter also performed in Canadian productions.)
+{record_delimiter}
+("entity"{tuple_delimiter}HOLTER{tuple_delimiter}PERSON{tuple_delimiter}Holter was an actor who had a recurring role on Street Legal and appeared in various films and stage productions.)
+{record_delimiter}
+("entity"{tuple_delimiter}THE SECRET FOUR{tuple_delimiter}FILM{tuple_delimiter}The Secret Four is a film released in the United Kingdom, previously known as The Myth of the Male Orgasm.)
+{record_delimiter}
+("entity"{tuple_delimiter}THE GIRL FROM MANHATTAN{tuple_delimiter}FILM{tuple_delimiter}The Girl from Manhattan is a 1948 American film starring Dorothy Lamour and George Montgomery.)
+{record_delimiter}
+("entity"{tuple_delimiter}LET THEM FALL IN LOVE{tuple_delimiter}ALBUM{tuple_delimiter}Let Them Fall in Love is an album by an artist that features a song mentioned in the text.)
+{record_delimiter}
+("entity"{tuple_delimiter}BIOMED CENTRAL{tuple_delimiter}ORGANIZATION{tuple_delimiter}BioMed Central (BMC) is a United Kingdom-based organization known for its contributions to open access publishing in the scientific community.)
+{record_delimiter}
+("relationship"{tuple_delimiter}HOLTER{tuple_delimiter}STREET LEGAL{tuple_delimiter}Holter had a recurring role on Street Legal as Jennifer Winston{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}JENNIFER WINSTON{tuple_delimiter}CHUCK TCHOBANIAN{tuple_delimiter}Jennifer Winston is dating Chuck Tchobanian in Street Legal{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}HOLTER{tuple_delimiter}THE MYTH OF THE MALE ORGASM{tuple_delimiter}Holter appeared in the film The Myth of the Male Orgasm{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}HOLTER{tuple_delimiter}LES MISÉRABLES{tuple_delimiter}Holter performed in Canadian productions of Les Misérables{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}HOLTER{tuple_delimiter}ASPECTS OF LOVE{tuple_delimiter}Holter performed in Canadian productions of Aspects of Love{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}THE MYTH OF THE MALE ORGASM{tuple_delimiter}THE SECRET FOUR{tuple_delimiter}The Myth of the Male Orgasm was released in the UK as The Secret Four{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}THE GIRL FROM MANHATTAN{tuple_delimiter}DOROTHY LAMOUR{tuple_delimiter}The Girl from Manhattan stars Dorothy Lamour and George Montgomery{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}LET THEM FALL IN LOVE{tuple_delimiter}HOLTER{tuple_delimiter}The song is from the artist's Let Them Fall in Love album, which Holter is associated with{tuple_delimiter}4)
+{record_delimiter}
+("relationship"{tuple_delimiter}BIOMED CENTRAL{tuple_delimiter}HOLTER{tuple_delimiter}BioMed Central is a UK-based organization that may publish works related to Holter's performances{tuple_delimiter}3)
+{completion_delimiter}
+#############################
+
+
+
+-Real Data-
+######################
+entity_types: [film, television, person, organization, documentary, actor, director, producer, screenwriter, musical composition, album, play, song, franchise]
+text: {input_text}
+######################
+output:

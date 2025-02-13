@@ -1,0 +1,1 @@
+python -m graphrag prompt-tune --root ragtest-2wiki/ --config ragtest-2wiki/settings.yaml --discover-entity-types
