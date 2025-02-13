@@ -94,6 +94,7 @@ class LocalSearchMixedContext(LocalContextBuilder):
         self,
         query: str,
         conversation_history: ConversationHistory | None = None,
+        predefined_selected_entities: list[Entity] | None = None,
         include_entity_names: list[str] | None = None,
         exclude_entity_names: list[str] | None = None,
         conversation_history_max_turns: int | None = 5,
@@ -138,17 +139,20 @@ class LocalSearchMixedContext(LocalContextBuilder):
             )
             query = f"{query}\n{pre_user_questions}"
 
-        selected_entities = map_query_to_entities(
-            query=query,
-            text_embedding_vectorstore=self.entity_text_embeddings,
-            text_embedder=self.text_embedder,
-            all_entities_dict=self.entities,
-            embedding_vectorstore_key=self.embedding_vectorstore_key,
-            include_entity_names=include_entity_names,
-            exclude_entity_names=exclude_entity_names,
-            k=top_k_mapped_entities,
-            oversample_scaler=2,
-        )
+        if predefined_selected_entities is not None:
+            selected_entities = predefined_selected_entities
+        else:
+            selected_entities = map_query_to_entities(
+                query=query,
+                text_embedding_vectorstore=self.entity_text_embeddings,
+                text_embedder=self.text_embedder,
+                all_entities_dict=self.entities,
+                embedding_vectorstore_key=self.embedding_vectorstore_key,
+                include_entity_names=include_entity_names,
+                exclude_entity_names=exclude_entity_names,
+                k=top_k_mapped_entities,
+                oversample_scaler=2,
+            )
 
         # build context
         final_context = list[str]()

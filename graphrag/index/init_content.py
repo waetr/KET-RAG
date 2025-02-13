@@ -39,7 +39,7 @@ async_mode: {defs.ASYNC_MODE.value} # or asyncio
 embeddings:
   ## parallelization: override the global parallelization settings for embeddings
   async_mode: {defs.ASYNC_MODE.value} # or asyncio
-  # target: {defs.EMBEDDING_TARGET.value} # or all
+  target: {defs.EMBEDDING_TARGET.value} # or all
   # batch_size: {defs.EMBEDDING_BATCH_SIZE} # the number of documents to send in a single request
   # batch_max_tokens: {defs.EMBEDDING_BATCH_MAX_TOKENS} # the maximum number of tokens to send in a single request
   vector_store:{defs.VECTOR_STORE}
@@ -70,7 +70,10 @@ chunks:
   size: {defs.CHUNK_SIZE}
   overlap: {defs.CHUNK_OVERLAP}
   group_by_columns: [{",".join(defs.CHUNK_GROUP_BY_COLUMNS)}] # by default, we don't allow chunks to cross documents
-
+  budget: {defs.KG_SKELETON_BUDGET}
+  knn_edges: {defs.KNN_GRAPH_EDGES}
+  build_skeleton_method: {defs.KG_SKELETON_METHOD}
+  split_size: {defs.CHUNK_SPLIT_SIZE}
 input:
   type: {defs.INPUT_TYPE.value} # or blob
   file_type: {defs.INPUT_FILE_TYPE.value} # or csv
@@ -151,6 +154,7 @@ umap:
   enabled: false # if true, will generate UMAP embeddings for nodes
 
 snapshots:
+  embeddings: true
   graphml: false
   raw_entities: false
   top_level_nodes: false

@@ -34,9 +34,10 @@ async def generate_text_embeddings(
     storage: PipelineStorage,
     text_embed: dict,
     embedded_fields: set[str],
-    snapshot_embeddings_enabled: bool = False,
+    snapshot_embeddings_enabled: bool = True,
     **_kwargs: dict,
 ) -> VerbResult:
+    print(f"embedded_fields:{embedded_fields} snapshot_embeddings:{snapshot_embeddings_enabled}")
     """All the steps to generate embeddings."""
     source = cast(pd.DataFrame, input.get_input())
     final_relationships = cast(

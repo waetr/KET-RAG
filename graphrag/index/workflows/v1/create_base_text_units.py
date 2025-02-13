@@ -24,8 +24,8 @@ def build_steps(
     n_tokens_column_name = config.get("n_tokens_column", "n_tokens")
     text_chunk_config = config.get("text_chunk", {})
     chunk_strategy = text_chunk_config.get("strategy")
-
     snapshot_transient = config.get("snapshot_transient", False) or False
+    embedding_strategy = config.get("embedding")
     return [
         {
             "verb": "create_base_text_units",
@@ -35,6 +35,7 @@ def build_steps(
                 "chunk_by_columns": chunk_by_columns,
                 "chunk_strategy": chunk_strategy,
                 "snapshot_transient_enabled": snapshot_transient,
+                "embedding_strategy": embedding_strategy
             },
             "input": {"source": DEFAULT_INPUT_NAME},
         },

@@ -31,6 +31,7 @@ async def create_base_text_units(
     chunk_by_columns: list[str],
     chunk_strategy: dict[str, Any] | None = None,
     snapshot_transient_enabled: bool = False,
+    embedding_strategy: dict[str, Any] | None = None,
     **_kwargs: dict,
 ) -> VerbResult:
     """All the steps to transform base text_units."""
@@ -45,6 +46,7 @@ async def create_base_text_units(
         chunk_by_columns,
         chunk_strategy=chunk_strategy,
         snapshot_transient_enabled=snapshot_transient_enabled,
+        embedding_strategy=embedding_strategy
     )
 
     await runtime_storage.set("base_text_units", output)

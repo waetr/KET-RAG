@@ -404,6 +404,10 @@ def create_graphrag_config(
                 overlap=reader.int("overlap") or defs.CHUNK_OVERLAP,
                 group_by_columns=group_by_columns,
                 encoding_model=reader.str(Fragment.encoding_model),
+                budget=reader.float("budget") or defs.KG_SKELETON_BUDGET,
+                build_skeleton_method=reader.str(Fragment.build_skeleton_method) or defs.KG_SKELETON_METHOD,
+                knn_edges=reader.int("knn_edges") or defs.KNN_GRAPH_EDGES,
+                split_size=reader.int("split_size") or defs.CHUNK_SPLIT_SIZE,
             )
         with (
             reader.envvar_prefix(Section.snapshot),
@@ -597,6 +601,7 @@ class Fragment(str, Enum):
     async_mode = "ASYNC_MODE"
     audience = "AUDIENCE"
     base_dir = "BASE_DIR"
+    build_skeleton_method = "BUILD_SKELETON_METHOD"
     concurrent_requests = "CONCURRENT_REQUESTS"
     conn_string = "CONNECTION_STRING"
     container_name = "CONTAINER_NAME"

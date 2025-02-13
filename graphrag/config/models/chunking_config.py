@@ -26,7 +26,10 @@ class ChunkingConfig(BaseModel):
     encoding_model: str | None = Field(
         default=None, description="The encoding model to use."
     )
-
+    budget: float = Field(description="The knowledge graph budget to use.", default=defs.KG_SKELETON_BUDGET)
+    build_skeleton_method: str = Field(description="The chunk selection method to use.", default=defs.KG_SKELETON_METHOD)
+    knn_edges: int = Field(description="The lexical/semantic edge number of the KNN graph.", default=defs.KNN_GRAPH_EDGES)
+    split_size: int = Field(description="The chunking size of the KNN graph.", default=300)
     def resolved_strategy(self, encoding_model: str) -> dict:
         """Get the resolved chunking strategy."""
         from graphrag.index.operations.chunk_text import ChunkStrategyType
@@ -37,4 +40,8 @@ class ChunkingConfig(BaseModel):
             "chunk_overlap": self.overlap,
             "group_by_columns": self.group_by_columns,
             "encoding_name": self.encoding_model or encoding_model,
+            "budget": self.budget,
+            "build_skeleton_method": self.build_skeleton_method,
+            "knn_edges": self.knn_edges,
+            "split_size": self.split_size,
         }

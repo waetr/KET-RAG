@@ -18,6 +18,7 @@ from graphrag.index.utils import is_null
 from graphrag.llm import EmbeddingLLM, OpenAIConfiguration
 
 from .typing import TextEmbeddingResult
+from tqdm.asyncio import tqdm
 
 log = logging.getLogger(__name__)
 

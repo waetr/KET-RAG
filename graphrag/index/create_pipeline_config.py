@@ -178,6 +178,7 @@ def _text_unit_workflows(
                         settings.encoding_model
                     )
                 },
+                "embedding": settings.embeddings.resolved_strategy(),
             },
         ),
         PipelineWorkflowReference(

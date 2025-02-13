@@ -2,6 +2,18 @@
 	"_comment": "Use this file to configure the graphrag project for debugging. You may create other configuration profiles based on these or select one below to use.",
 	"version": "0.2.0",
 	"configurations": [
+
+
+
+
+		{
+            "name": "Python: Create Context",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/indexing_sket/create_context.py",
+            "args": ["ragtest-2wiki", "keyword", "0.5"],
+            "console": "integratedTerminal"
+        },
 		{
 			"name": "Indexer",
 			"type": "debugpy",

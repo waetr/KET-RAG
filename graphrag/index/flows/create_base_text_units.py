@@ -5,6 +5,7 @@
 
 from dataclasses import dataclass
 from typing import Any, cast
+from indexing_sket.filter_chunks import filter_text_units
 
 import pandas as pd
 from datashaper import (
@@ -29,6 +30,7 @@ async def create_base_text_units(
     chunk_by_columns: list[str],
     chunk_strategy: dict[str, Any] | None = None,
     snapshot_transient_enabled: bool = False,
+    embedding_strategy: dict[str, Any] | None = None,
 ) -> pd.DataFrame:
     """All the steps to transform base text_units."""
     sort = documents.sort_values(by=["id"], ascending=[True])
@@ -80,6 +82,8 @@ async def create_base_text_units(
     output = cast(
         pd.DataFrame, chunked[chunked[chunk_column_name].notna()].reset_index(drop=True)
     )
+
+    output = await filter_text_units(output, storage, callbacks, chunk_strategy, embedding_strategy)
 
     if snapshot_transient_enabled:
         await snapshot(

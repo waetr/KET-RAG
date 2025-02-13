@@ -7,6 +7,7 @@ import json  # noqa: I001
 from typing import Any
 
 import pyarrow as pa
+import numpy as np
 
 from graphrag.model.types import TextEmbedder
 
