@@ -108,5 +108,3 @@ python indexing_sket/llm_answer.py ragtest-musique/
 ## Acknowledgments
 
 This project builds upon [Microsoft's GraphRAG (version 0.4.1)](https://github.com/microsoft/graphrag/commit/ba50caab4d2fea9bc3fd926dd9051b9f4cebf6bd), licensed under the MIT License.
-
-For more details, read our paper on [arXiv](https://arxiv.org/abs/2502.09304).
