@@ -9,6 +9,9 @@
         <a href='https://github.com/waetr/KET-RAG/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
         <a href='https://arxiv.org/abs/2502.09304'><img src='https://img.shields.io/badge/arXiv-2502.09304-b31b1b'></a>
         <img src="https://img.shields.io/badge/python-3.10-blue">
+        <a href='https://opensource.org/licenses/Apache-2.0'>
+    		<img src='https://img.shields.io/badge/License-Apache_2.0-blue.svg' alt='Apache 2.0 License'>
+		</a>
     </p>
     <p style="text-align: center;">
         <img src="https://raw.githubusercontent.com/waetr/KET-RAG/main/ketrag.png" alt="KET-RAG Image" width="width: 70%; max-width: 800px;">
